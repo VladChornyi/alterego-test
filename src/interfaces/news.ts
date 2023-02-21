@@ -20,3 +20,9 @@ export interface INews {
   total_items: number;
   total_pages: number;
 }
+
+export interface IGetNewsParams {
+  limit?: number;
+  pages?: number;
+  search?: string;
+}

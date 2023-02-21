@@ -21,19 +21,21 @@ export const NewsItem = ({ item }: IProps) => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {cutString(item.title, 20)}
+          {cutString(item.title, 18)}
         </Typography>
         <Typography
-          variant="body2"
+          variant="body1"
           color="text.secondary"
           sx={{ minHeight: 50 }}
         >
-          {cutString(item.content, 80)}
+          {cutString(item.content, 55)}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
         <Button size="small">Learn More</Button>
+        <Button size="small" color="warning">
+          Delete
+        </Button>
       </CardActions>
     </Card>
   );

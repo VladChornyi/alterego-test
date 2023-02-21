@@ -8,6 +8,14 @@ export const pages = {
       title: "News",
       path: "/news",
     },
+    {
+      title: "SignIn",
+      path: "/signin",
+    },
+    {
+      title: "SignUp",
+      path: "/signup",
+    },
   ],
   private: [{ title: "Profile", path: "/profile" }],
 };

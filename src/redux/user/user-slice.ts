@@ -2,8 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { STATUS } from "../../constants/fetchStatus";
 import { IAuth } from "../interfaces";
 
-const initialState = {
+const initialState: IAuth = {
   status: STATUS.idle,
+  token: null,
+  tokenType: null,
 };
 
 const userSlice = createSlice({
