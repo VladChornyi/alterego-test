@@ -6,6 +6,7 @@ const initialState: IAuth = {
   status: STATUS.idle,
   token: null,
   tokenType: null,
+  errorMessage: null,
 };
 
 const userSlice = createSlice({

@@ -1,16 +1,15 @@
-import { IUser } from "./../redux/interfaces";
+import { ILoginResponse, IUser } from "./../redux/interfaces";
 import { ISignUpCredentials, ISignInCredentials } from "./../interfaces/auth";
 import { privateApi, publicApi } from "./../http/http";
 
-export const signUpService = async (params: ISignUpCredentials) => {
-  await publicApi.get<never>("/users/create", { params });
+export const signUpService = async (body: ISignUpCredentials) => {
+  await publicApi.post<never>("/users/create", body);
 };
 
-export const signInService = async (params: ISignInCredentials) => {
-  const { data } = await publicApi.get<IUser>("/users/login", { params });
+export const signInService = async (body: ISignInCredentials) => {
+  const { data } = await publicApi.post<ILoginResponse>("/users/login", body);
   return data;
 };
-
 export const refreshUserService = async () => {
   const { data } = await privateApi.get<IUser>("/users/profile");
   return data;

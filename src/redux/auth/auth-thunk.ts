@@ -1,30 +1,21 @@
-import {
-  ISignInCredentials,
-  ISignUpCredentials,
-} from "./../../interfaces/auth";
-import { signInService, signUpService } from "./../../services/auth-services";
+import { toast } from "react-toastify";
+import { ISignInCredentials } from "./../../interfaces/auth";
+import { signInService } from "./../../services/auth-services";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { omit } from "lodash";
-export const signUpThunk = createAsyncThunk(
-  "auth/signUp",
-  async (credentials: ISignUpCredentials, { rejectWithValue, dispatch }) => {
-    try {
-      await signUpService(credentials);
-      dispatch(signInThunk(omit(credentials, ["first_name", "last_name"])));
-    } catch {
-      return rejectWithValue("Oooops");
-    }
-  }
-);
 
 export const signInThunk = createAsyncThunk(
-  "auth/signUp",
+  "auth/signIn",
   async (credentials: ISignInCredentials, { rejectWithValue }) => {
+    toast.error("Ім'я користувача або пароль введено неправильно.");
     try {
       const data = await signInService(credentials);
       return data;
-    } catch {
-      return rejectWithValue("Oooops");
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      toast.error("Ім'я користувача або пароль введено неправильно.");
+      return rejectWithValue("Ooops... Something went wrong");
     }
   }
 );
