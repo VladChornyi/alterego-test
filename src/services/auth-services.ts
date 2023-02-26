@@ -1,4 +1,4 @@
-import { ILoginResponse, IUser } from "./../redux/interfaces";
+import { ILoginResponse, IUser, IUserData } from "./../redux/interfaces";
 import { ISignUpCredentials, ISignInCredentials } from "./../interfaces/auth";
 import { privateApi, publicApi } from "./../http/http";
 
@@ -11,6 +11,6 @@ export const signInService = async (body: ISignInCredentials) => {
   return data;
 };
 export const refreshUserService = async () => {
-  const { data } = await privateApi.get<IUser>("/users/profile");
+  const { data } = await privateApi.get<IUserData>("/users/profile");
   return data;
 };

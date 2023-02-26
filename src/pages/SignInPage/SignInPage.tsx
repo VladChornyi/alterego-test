@@ -8,15 +8,28 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { ChangeEvent, useState } from "react";
+import { useAppDispatch } from "../../redux/store";
+import { signInThunk } from "../../redux/auth/auth-thunk";
 
 export const SignInPage = () => {
+  const dispatch = useAppDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const userMap = {
+    email: setEmail,
+    password: setPassword,
+  };
+
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    userMap[name as keyof typeof userMap](value);
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    dispatch(signInThunk({ email, password }));
   };
 
   return (
@@ -36,14 +49,16 @@ export const SignInPage = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
             fullWidth
+            type="email"
             id="email"
             label="Email Address"
             name="email"
+            onChange={handleChangeInput}
             autoComplete="email"
             autoFocus
           />
@@ -51,6 +66,8 @@ export const SignInPage = () => {
             margin="normal"
             required
             fullWidth
+            onChange={handleChangeInput}
+            inputProps={{ minLength: 7 }}
             name="password"
             label="Password"
             type="password"

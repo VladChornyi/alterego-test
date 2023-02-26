@@ -13,7 +13,7 @@ export const privateApi = axios.create({
   baseURL: "https://taupe-croissant-c4162a.netlify.app/api",
 });
 
-export const token = {
+export const accessToken = {
   set: (data: IData) => {
     privateApi.defaults.headers.Authorization = `${data.token_type} ${data.access_token}`;
   },

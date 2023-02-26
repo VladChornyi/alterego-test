@@ -13,6 +13,7 @@ import { signUpService } from "../../services/auth-services";
 import { useAppDispatch } from "../../redux/store";
 import { signInThunk } from "../../redux/auth/auth-thunk";
 import React, { ChangeEvent, useState } from "react";
+import axios, { AxiosError } from "axios";
 
 export const SignUpPage = () => {
   const dispatch = useAppDispatch();
@@ -33,12 +34,17 @@ export const SignUpPage = () => {
     userMap[name as keyof typeof userMap](value);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    toast.error("Ім'я користувача або пароль введено неправильно.");
-    signUpService({ email, password, first_name, last_name }).then(() => {
+    try {
+      await signUpService({ email, password, first_name, last_name });
       dispatch(signInThunk({ email, password }));
-    });
+    } catch (e) {
+      const error = e as Error | AxiosError;
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data.detail);
+      }
+    }
   };
 
   return (
@@ -81,6 +87,7 @@ export const SignUpPage = () => {
                 required
                 onChange={handleChangeInput}
                 fullWidth
+                inputProps={{ minLength: 3 }}
                 id="last_name"
                 label="Last Name"
                 name="last_name"
@@ -107,6 +114,7 @@ export const SignUpPage = () => {
                 required
                 fullWidth
                 onChange={handleChangeInput}
+                inputProps={{ minLength: 7 }}
                 name="password"
                 label="Password"
                 type="password"

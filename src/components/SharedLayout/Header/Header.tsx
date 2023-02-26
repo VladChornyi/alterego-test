@@ -13,30 +13,23 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import * as S from "./Header.styled";
 import { pages } from "../../../constants/pages";
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { LogoutBtn } from "../../LogoutBtn/LogoutBtn";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../../redux/auth/auth-selector";
+import { LanguageSelect } from "../../LanguageSelect/LanguageSelect";
 
 export const Header = () => {
+  const token = useSelector(selectToken);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -62,7 +55,6 @@ export const Header = () => {
               LOGO
             </S.HeaderLink>
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -97,9 +89,18 @@ export const Header = () => {
                   <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
               ))}
+              {pages.restricted.map((page) => (
+                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page.title}</Typography>
+                </MenuItem>
+              ))}
+              {pages.private.map((page) => (
+                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page.title}</Typography>
+                </MenuItem>
+              ))}
             </Menu>
           </Box>
-
           <Typography
             variant="h5"
             noWrap
@@ -132,46 +133,33 @@ export const Header = () => {
                 {page.title}
               </S.HeaderLink>
             ))}
-            {pages.private.map((page) => (
-              <S.HeaderLink
-                to={page.path}
-                key={page.title}
-                onClick={handleCloseNavMenu}
-              >
-                {page.title}
-              </S.HeaderLink>
-            ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
+            {token &&
+              pages.private.map((page) => (
+                <S.HeaderLink
+                  to={page.path}
+                  key={page.title}
+                  onClick={handleCloseNavMenu}
+                >
+                  {page.title}
+                </S.HeaderLink>
               ))}
-            </Menu>
+            {!token &&
+              pages.restricted.map((page) => (
+                <S.HeaderLink
+                  to={page.path}
+                  key={page.title}
+                  onClick={handleCloseNavMenu}
+                >
+                  {page.title}
+                </S.HeaderLink>
+              ))}
           </Box>
+          <LanguageSelect />
+          {token && (
+            <Box sx={{ flexGrow: 0 }}>
+              <LogoutBtn />
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

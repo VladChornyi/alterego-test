@@ -41,7 +41,8 @@ const authSlice = createSlice({
 const persistConfig = {
   key: "token",
   storage,
-  whitelist: ["token"],
+  whitelist: ["token", "tokenType"],
 };
 
+export const { logout } = authSlice.actions;
 export const authReducer = persistReducer(persistConfig, authSlice.reducer);

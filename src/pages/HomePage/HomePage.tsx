@@ -1,3 +1,6 @@
+import { useTranslation } from "react-i18next";
+
 export const HomePage = () => {
-  return <div>Home</div>;
+  const { t } = useTranslation();
+  return <div>{t("Home")}</div>;
 };

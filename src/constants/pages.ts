@@ -8,6 +8,8 @@ export const pages = {
       title: "News",
       path: "/news",
     },
+  ],
+  restricted: [
     {
       title: "SignIn",
       path: "/signin",

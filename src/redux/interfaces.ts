@@ -7,9 +7,19 @@ export interface IAuth {
   errorMessage: string | null;
 }
 
+export interface IUserData {
+  id: string;
+  first_name: string;
+  last_name: string;
+  created_at: string;
+  avatar: string;
+  bio: string;
+  email: string;
+}
+
 export interface IUser {
   status: string;
-  data: any;
+  data: IUserData;
 }
 
 export interface ILoginResponse {
