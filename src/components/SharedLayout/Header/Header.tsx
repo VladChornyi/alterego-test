@@ -7,8 +7,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import * as S from "./Header.styled";
@@ -17,9 +15,11 @@ import { LogoutBtn } from "../../LogoutBtn/LogoutBtn";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../../redux/auth/auth-selector";
 import { LanguageSelect } from "../../LanguageSelect/LanguageSelect";
+import { useTranslation } from "react-i18next";
 
 export const Header = () => {
   const token = useSelector(selectToken);
+  const { t } = useTranslation();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -52,7 +52,7 @@ export const Header = () => {
           >
             <S.HeaderLink to="/">
               <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-              LOGO
+              {t("logo")}
             </S.HeaderLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -86,17 +86,17 @@ export const Header = () => {
             >
               {pages.public.map((page) => (
                 <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.title}</Typography>
+                  <Typography textAlign="center">{t(page.title)}</Typography>
                 </MenuItem>
               ))}
               {pages.restricted.map((page) => (
                 <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.title}</Typography>
+                  <Typography textAlign="center">{t(page.title)}</Typography>
                 </MenuItem>
               ))}
               {pages.private.map((page) => (
                 <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.title}</Typography>
+                  <Typography textAlign="center">{t(page.title)}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -118,7 +118,7 @@ export const Header = () => {
           >
             <S.HeaderLink to="/">
               <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-              LOGO
+              {t("logo")}
             </S.HeaderLink>
           </Typography>
           <Box
@@ -130,7 +130,7 @@ export const Header = () => {
                 key={page.title}
                 onClick={handleCloseNavMenu}
               >
-                {page.title}
+                {t(page.title)}
               </S.HeaderLink>
             ))}
             {token &&
@@ -140,7 +140,7 @@ export const Header = () => {
                   key={page.title}
                   onClick={handleCloseNavMenu}
                 >
-                  {page.title}
+                  {t(page.title)}
                 </S.HeaderLink>
               ))}
             {!token &&
@@ -150,7 +150,7 @@ export const Header = () => {
                   key={page.title}
                   onClick={handleCloseNavMenu}
                 >
-                  {page.title}
+                  {t(page.title)}
                 </S.HeaderLink>
               ))}
           </Box>

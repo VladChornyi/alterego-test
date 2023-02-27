@@ -1,6 +1,8 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export const Footer = () => {
+  const { t } = useTranslation();
   return (
     <Box
       sx={{
@@ -16,12 +18,12 @@ export const Footer = () => {
         <Grid container direction="column" alignItems="center">
           <Grid item xs={12}>
             <Typography color="white" variant="h5">
-              React Starter App
+              {t("glory")}
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography color="white" variant="subtitle1">
-              {`${new Date().getFullYear()} | React | Material UI | React Router`}
+              {`${new Date().getFullYear()} | React | Material UI | React Router | React-i18next | Redux | TypeScript`}
             </Typography>
           </Grid>
         </Grid>

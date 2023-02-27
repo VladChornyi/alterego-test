@@ -7,7 +7,7 @@ import {
   refreshUserService,
 } from "./../../services/auth-services";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ILoginResponse, IUser, IUserData } from "../interfaces";
+import { ILoginResponse, IUserData } from "../interfaces";
 
 export const signInThunk = createAsyncThunk<
   ILoginResponse,
@@ -36,7 +36,7 @@ export const signInThunk = createAsyncThunk<
 
 export const refreshUserThunk = createAsyncThunk<
   IUserData,
-  never,
+  void,
   {
     dispatch: AppDispatch;
     state: RootState;
@@ -44,7 +44,6 @@ export const refreshUserThunk = createAsyncThunk<
 >("auth/refreshUser", async (_, { rejectWithValue, getState }) => {
   try {
     const { token, tokenType } = getState().auth;
-    console.log(token, tokenType);
     if (token && tokenType) {
       accessToken.set({ token_type: tokenType, access_token: token });
     }

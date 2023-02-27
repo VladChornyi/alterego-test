@@ -6,12 +6,20 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { ISingleNews } from "../../interfaces/news";
 import { cutString } from "../../helpers/cut-string";
+import { useAppDispatch } from "../../redux/store";
+import { deleteNews } from "../../redux/news/news-slice";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   item: ISingleNews;
 }
 
 export const NewsItem = ({ item }: IProps) => {
+  const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+  const handleDelete = () => {
+    dispatch(deleteNews(item.id));
+  };
   return (
     <Card sx={{ maxWidth: "100%" }}>
       <CardMedia
@@ -32,9 +40,8 @@ export const NewsItem = ({ item }: IProps) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
-        <Button size="small" color="warning">
-          Delete
+        <Button size="small" color="warning" onClick={handleDelete}>
+          {t("delete")}
         </Button>
       </CardActions>
     </Card>

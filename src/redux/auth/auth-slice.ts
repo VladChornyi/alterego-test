@@ -34,7 +34,7 @@ const authSlice = createSlice({
         if (typeof payload === "string") {
           state.errorMessage = payload;
         }
-      });
+      })
   },
 });
 

@@ -6,9 +6,10 @@ import { useTranslation } from "react-i18next";
 import { lang } from "../../constants/localKeys";
 
 export const LanguageSelect = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const handleChange = (event: SelectChangeEvent) => {
     i18n.changeLanguage(event.target.value as string);
+    localStorage.setItem(lang, event.target.value);
   };
 
   return (

@@ -1,19 +1,24 @@
+import { refreshUserThunk } from "./../auth/auth-thunk";
+import { IUser } from "./../../interfaces/auth";
 import { createSlice } from "@reduxjs/toolkit";
-import { STATUS } from "../../constants/fetchStatus";
-import { IAuth } from "../interfaces";
 
-const initialState: IAuth = {
-  status: STATUS.idle,
-  token: null,
-  tokenType: null,
-  errorMessage: null,
+const initialState: IUser = {
+  id: "",
+  first_name: "",
+  last_name: "",
+  created_at: "",
+  avatar: "",
+  bio: "",
+  email: "",
 };
 
 const userSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addCase(refreshUserThunk.fulfilled, (_, { payload }) => payload);
+  },
 });
 
 export const userReducer = userSlice.reducer;

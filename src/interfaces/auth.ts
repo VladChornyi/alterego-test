@@ -9,7 +9,7 @@ export interface ISignUpCredentials extends ISignInCredentials {
 }
 
 export interface IUser {
-  id: number;
+  id: number | string;
   first_name: string;
   last_name: string;
   created_at: string;

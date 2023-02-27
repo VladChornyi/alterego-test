@@ -1,3 +1,17 @@
 {
-  "Home": "Головна"
+  "work": " Роботу виконано у межах тестового завдання на позицію Strong Junior Front End Developer React для компанії AlterEGO",
+  "developer": "Розробник: Чорний Владислав Сергійович",
+  "name": "Ім'я : {{first_name}}",
+  "lastName": "Прізвище : {{last_name}}",
+  "email": "Електронна пошта : {{email}}",
+  "loadMore": "Давай ще",
+  "delete": "Видалити",
+  "logo": "ЛОГОТИП",
+  "Home": "Головна",
+  "News": "Новини",
+  "SignIn": "Увійти",
+  "SignUp": "Зареєструватись",
+  "Profile": "Кабінет",
+  "logOut": "Вийти",
+  "glory": "Слава Україні"
 }

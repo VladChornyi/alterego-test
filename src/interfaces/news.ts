@@ -1,5 +1,5 @@
 export interface ISingleNews {
-  id: number;
+  id: string;
   title: string;
   content: string;
   image: string;
@@ -23,6 +23,6 @@ export interface INews {
 
 export interface IGetNewsParams {
   limit?: number;
-  pages?: number;
+  page?: number;
   search?: string;
 }
