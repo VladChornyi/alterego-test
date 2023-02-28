@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import { NewsItem } from "../../components";
 import {
   selectNews,
   selectNewsPage,
@@ -9,9 +11,7 @@ import {
 } from "../../redux/news/news-selector";
 import { getNewsThunk, loadMoreNewsThunk } from "../../redux/news/news-thunk";
 import { useAppDispatch } from "../../redux/store";
-import { NewsItem } from "../../components/NewsItem/NewsItem";
 import { loadMore } from "../../redux/news/news-slice";
-import { useTranslation } from "react-i18next";
 
 export const NewsPage = () => {
   const dispatch = useAppDispatch();

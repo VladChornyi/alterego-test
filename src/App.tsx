@@ -1,22 +1,22 @@
 import { lazy, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
-import { PublicRoute } from "./components/PublicRoute/PublicRoute";
-import { SharedLayout } from "./components/SharedLayout/SharedLayout";
-import { SignInPage } from "./pages/SignInPage/SignInPage";
-import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
-import { refreshUserThunk } from "./redux/auth/auth-thunk";
+import { PrivateRoute, PublicRoute, SharedLayout } from "./components";
+import { refreshUserThunk } from "./redux/user/user-thunk";
 import { useAppDispatch } from "./redux/store";
+
 const HomePage = lazy(() => import("./pages/HomePage"));
 const NewsPage = lazy(() => import("./pages/NewsPage"));
 const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+const SignInPage = lazy(() => import("./pages/SignInPage"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(refreshUserThunk());
   });
+
   return (
     <>
       <Routes>

@@ -1,6 +1,6 @@
-import { refreshUserThunk } from "./../auth/auth-thunk";
 import { IUser } from "./../../interfaces/auth";
 import { createSlice } from "@reduxjs/toolkit";
+import { refreshUserThunk } from "./user-thunk";
 
 const initialState: IUser = {
   id: "",

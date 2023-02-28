@@ -86,19 +86,39 @@ export const Header = () => {
             >
               {pages.public.map((page) => (
                 <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{t(page.title)}</Typography>
+                  <S.HeaderLink
+                    to={page.path}
+                    key={page.title}
+                    onClick={handleCloseNavMenu}
+                  >
+                    {t(page.title)}
+                  </S.HeaderLink>
                 </MenuItem>
               ))}
-              {pages.restricted.map((page) => (
-                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{t(page.title)}</Typography>
-                </MenuItem>
-              ))}
-              {pages.private.map((page) => (
-                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{t(page.title)}</Typography>
-                </MenuItem>
-              ))}
+              {!token &&
+                pages.restricted.map((page) => (
+                  <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                    <S.HeaderLink
+                      to={page.path}
+                      key={page.title}
+                      onClick={handleCloseNavMenu}
+                    >
+                      {t(page.title)}
+                    </S.HeaderLink>
+                  </MenuItem>
+                ))}
+              {token &&
+                pages.private.map((page) => (
+                  <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                    <S.HeaderLink
+                      to={page.path}
+                      key={page.title}
+                      onClick={handleCloseNavMenu}
+                    >
+                      {t(page.title)}
+                    </S.HeaderLink>
+                  </MenuItem>
+                ))}
             </Menu>
           </Box>
           <Typography

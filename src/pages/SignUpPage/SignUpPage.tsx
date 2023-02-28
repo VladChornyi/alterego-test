@@ -1,4 +1,7 @@
+import React, { ChangeEvent, useState } from "react";
+import axios, { AxiosError } from "axios";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -12,10 +15,9 @@ import Container from "@mui/material/Container";
 import { signUpService } from "../../services/auth-services";
 import { useAppDispatch } from "../../redux/store";
 import { signInThunk } from "../../redux/auth/auth-thunk";
-import React, { ChangeEvent, useState } from "react";
-import axios, { AxiosError } from "axios";
 
 export const SignUpPage = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,13 +64,12 @@ export const SignUpPage = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          {t("SignUp")}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                // error
                 autoComplete="given-name"
                 name="first_name"
                 required
@@ -77,46 +78,42 @@ export const SignUpPage = () => {
                 value={first_name}
                 inputProps={{ minLength: 3 }}
                 id="first_name"
-                label="First Name"
+                label={t("firstName")}
                 autoFocus
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                // error
                 required
                 onChange={handleChangeInput}
                 fullWidth
                 inputProps={{ minLength: 3 }}
                 id="last_name"
-                label="Last Name"
+                label={t("surname")}
                 name="last_name"
                 autoComplete="family-name"
-                helperText="Incorrect entry."
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                // error={false}
                 required
                 fullWidth
                 onChange={handleChangeInput}
                 type="email"
                 id="email"
-                label="Email Address"
+                label={t("emailAddress")}
                 name="email"
                 autoComplete="email"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                // error
                 required
                 fullWidth
                 onChange={handleChangeInput}
                 inputProps={{ minLength: 7 }}
                 name="password"
-                label="Password"
+                label={t("password")}
                 type="password"
                 id="password"
                 autoComplete="new-password"
@@ -129,12 +126,12 @@ export const SignUpPage = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign Up
+            {t("SignUp")}
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link style={{ color: "#1976d2" }} to="/signin">
-                Already have an account? Sign in
+                {t("existingAccount")}
               </Link>
             </Grid>
           </Grid>

@@ -1,9 +1,13 @@
 {
   "work": "The work was performed as part of a test assignment for the position of Strong Junior Front End Developer React for AlterEGO",
-  "developer": "Developer: Chornyy Vladyslav Serhiyovych",
+  "developer": "Developer: Chornyy Vladyslav",
   "name": "Name : {{first_name}}",
+  "firstName": "Name",
   "lastName": "Last name : {{last_name}}",
+  "surname": "Last name",
   "email": "Email  : {{email}}",
+  "emailAddress": "Email address",
+  "password": "Password",
   "loadMore": "Load more",
   "delete": "Delete",
   "logo": "LOGO",
@@ -13,5 +17,8 @@
   "SignUp": "SignUp",
   "Profile": "Profile",
   "logOut": "Log out",
-  "glory": "Glory to Ukraine"
+  "missingAccount": "Don't have an account? Sign Up",
+  "existingAccount": "Already have an account? Sign in",
+  "glory": "Glory to Ukraine",
+  "incorrect": "Incorrect email or password. Please, try again"
 }

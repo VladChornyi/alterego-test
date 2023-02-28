@@ -1,4 +1,7 @@
+import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -8,12 +11,13 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { ChangeEvent, useState } from "react";
 import { useAppDispatch } from "../../redux/store";
 import { signInThunk } from "../../redux/auth/auth-thunk";
 
 export const SignInPage = () => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,7 +33,9 @@ export const SignInPage = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(signInThunk({ email, password }));
+    dispatch(signInThunk({ email, password }))
+      .unwrap()
+      .catch(() => toast.error(t("incorrect")));
   };
 
   return (
@@ -47,7 +53,7 @@ export const SignInPage = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          {t("SignIn")}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
@@ -56,7 +62,7 @@ export const SignInPage = () => {
             fullWidth
             type="email"
             id="email"
-            label="Email Address"
+            label={t("emailAddress")}
             name="email"
             onChange={handleChangeInput}
             autoComplete="email"
@@ -69,7 +75,7 @@ export const SignInPage = () => {
             onChange={handleChangeInput}
             inputProps={{ minLength: 7 }}
             name="password"
-            label="Password"
+            label={t("password")}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -80,12 +86,12 @@ export const SignInPage = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            {t("SignIn")}
           </Button>
           <Grid container>
             <Grid item>
               <Link style={{ color: "#1976d2" }} to="/signup">
-                Don't have an account? Sign Up
+                {t("missingAccount")}
               </Link>
             </Grid>
           </Grid>

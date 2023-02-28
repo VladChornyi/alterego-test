@@ -1,4 +1,4 @@
-import { ILoginResponse, IUser, IUserData } from "./../redux/interfaces";
+import { ILoginResponse, IUserData } from "./../redux/interfaces";
 import { ISignUpCredentials, ISignInCredentials } from "./../interfaces/auth";
 import { privateApi, publicApi } from "./../http/http";
 
